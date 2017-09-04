@@ -17,7 +17,7 @@ If has a **home page** that is public with or without a user that is logged.
 The project uses the email as username for registration but is easy to change if you need to change that
 
 
-##How to configure?
+### How to configure?
 Go to config folder and set:
 
 SERVER_URL: 'http://localhost:1337/parse', whatever you need to point
@@ -25,7 +25,7 @@ SERVER_URL: 'http://localhost:1337/parse', whatever you need to point
 PARSE_KEY: '<PUT_YOUR_APP_ID_HERE>'
 
 
-##How to run it?
+### How to run it?
 
 As any angular project generated with angular cli
 
