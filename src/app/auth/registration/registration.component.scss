@@ -1,0 +1,65 @@
+md-toolbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.registration-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: calc(100% - 64px - 50px);
+}
+
+.registration-card {
+  min-width: 150px;
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (max-width: 450px) {
+    width: 80%;
+  }
+}
+
+.registration-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.registration-content {
+  width: 80%;
+}
+
+.registration-actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  &.right {
+    justify-content: flex-end;
+  }
+}
+
+hr {
+  display: block;
+  margin: 4px 0 4px 0;
+  border-top: 1px solid rgba(0, 0, 0, .12);
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  width: 100%
+}

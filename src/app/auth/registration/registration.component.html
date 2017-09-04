@@ -1,0 +1,57 @@
+<md-toolbar color="primary">
+  <span>Logo</span>
+</md-toolbar>
+
+<div class="registration-container">
+  <md-card class="registration-card">
+    <md-card-title>
+      Registration
+    </md-card-title>
+    <form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
+      <md-card-content class="registration-content">
+        <md-form-field class="registration-form">
+          <input mdInput placeholder="Email" required email type="text" class="form-control" #userName="ngModel"
+                 name="username" [(ngModel)]="model.userName" >
+          <md-error *ngIf="userName.hasError('required')">
+            Valid email is required
+          </md-error>
+          <md-error *ngIf="!userName.hasError('required') && userName.hasError('email')">
+            Please input a valid email
+          </md-error>
+        </md-form-field>
+        <md-form-field class="registration-form">
+          <input mdInput placeholder="Password" required minlength="6" type="password" class="form-control"  #pass="ngModel"
+                 name="password" [(ngModel)]="model.password" >
+          <md-error *ngIf="pass.hasError('required')">
+            Password is required
+          </md-error>
+          <md-error *ngIf="!pass.hasError('required') && pass.hasError('minlength')">
+            Password must be at least 6 characters long
+          </md-error>
+        </md-form-field>
+        <md-form-field class="registration-form">
+          <input mdInput placeholder="Repeat password" required minlength="6" type="password" class="form-control"  #pass2="ngModel"
+                 name="password2" [(ngModel)]="model.passwordRepeat" >
+          <md-error *ngIf="pass2.hasError('required')">
+            Password is required
+          </md-error>
+          <md-error *ngIf="!pass2.hasError('required') && pass2.hasError('minlength')">
+            Password must be at least 6 characters long
+          </md-error>
+          <md-error *ngIf="!pass2.hasError('required') && pass2.value !== pass.value">
+            Passwords do not match
+          </md-error>
+        </md-form-field>
+      </md-card-content>
+      <hr>
+      <md-card-actions class="registration-actions right">
+        <button md-raised-button type="submit" color="primary" [disabled]="!registrationForm.form.valid || pass2.value !== pass.value">Register</button>
+      </md-card-actions>
+    </form>
+    <hr>
+    <md-card-actions class="registration-actions">
+      <button md-button color="primary" (click)="forgotPassword()">Forgot your password?</button>
+      <button md-raised-button (click)="login()" color="primary">Login</button>
+    </md-card-actions>
+  </md-card>
+</div>
