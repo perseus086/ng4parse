@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ParseService } from '../../core/parse/parse.service';
 import { Router } from '@angular/router';
 import { MdSnackBar } from '@angular/material';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,19 +12,25 @@ import { MdSnackBar } from '@angular/material';
 
 export class LoginComponent implements OnInit {
 
-  private model: LoginModel;
+  private loginForm: FormGroup;
 
-  constructor(private parseService: ParseService, private router: Router, public snackBar: MdSnackBar) { }
+  constructor(private parseService: ParseService, private router: Router, public snackBar: MdSnackBar, private formBuilder: FormBuilder) {
+
+    this.loginForm = formBuilder.group({
+      userName: [null, Validators.compose([Validators.required, Validators.email])],
+      password: [null, Validators.compose([Validators.required, Validators.minLength(6)])]
+    })
+
+  }
 
   ngOnInit() {
     if(this.parseService.isLoggedIn()) {
       this.router.navigate(['restricted']);
     }
-    this.model = new LoginModel('', '');
   }
 
-  onSubmit() {
-    this.parseService.login(this.model.userName, this.model.password)
+  onSubmit(formReference) {
+    this.parseService.login(formReference.userName, formReference.password)
       .then( (user) => {
         console.log('here', user);
         this.router.navigate(['restricted']);
@@ -44,11 +51,4 @@ export class LoginComponent implements OnInit {
   register() {
     this.router.navigate(['auth', 'register']);
   }
-}
-
-class LoginModel {
-  constructor(
-    public userName: string,
-    public password: string
-  ){}
 }

@@ -6,7 +6,7 @@ import { AuthRoutes } from './auth.routing';
 import { RouterModule } from '@angular/router';
 import { RegistrationComponent } from './registration/registration.component';
 import { MdButtonModule, MdToolbarModule, MdCardModule, MdInputModule, MdSnackBarModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const MATERIAL_MODULES = [
@@ -21,6 +21,7 @@ const MATERIAL_MODULES = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(AuthRoutes),
     ...MATERIAL_MODULES
   ],

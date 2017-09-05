@@ -7,32 +7,30 @@
     <md-card-title>
       Login
     </md-card-title>
-    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
       <md-card-content class="login-content">
         <md-form-field class="login-form">
-          <input mdInput placeholder="Email" required type="text" class="form-control" #userName="ngModel"
-                 name="username" [(ngModel)]="model.userName" >
-          <md-error *ngIf="userName.hasError('required')">
+          <input mdInput class="form-control" placeholder="Email" type="text" formControlName="userName" >
+          <md-error *ngIf="loginForm.controls['userName'].hasError('required') && loginForm.controls['userName'].touched">
             Email is required
           </md-error>
-          <md-error *ngIf="!userName.hasError('required') && userName.hasError('email')">
+          <md-error *ngIf="!loginForm.controls['userName'].hasError('required') && loginForm.controls['userName'].hasError('email')">
             Please input a valid email
           </md-error>
         </md-form-field>
         <md-form-field class="login-form">
-          <input mdInput placeholder="Password" required minlength="6" type="password" class="form-control"  #pass="ngModel"
-                 name="password" [(ngModel)]="model.password" >
-          <md-error *ngIf="pass.hasError('required')">
+          <input mdInput class="form-control" placeholder="Password" type="password" formControlName="password" >
+          <md-error *ngIf="loginForm.controls['password'].hasError('required')">
             Password is required
           </md-error>
-          <md-error *ngIf="!pass.hasError('required') && pass.hasError('minlength')">
+          <md-error *ngIf="!loginForm.controls['password'].hasError('required') && loginForm.controls['password'].hasError('minlength')">
             Password must be at least 6 characters long
           </md-error>
         </md-form-field>
       </md-card-content>
       <hr>
       <md-card-actions class="login-actions right">
-        <button md-raised-button type="submit" color="primary" [disabled]="!loginForm.form.valid">Login here</button>
+        <button md-raised-button type="submit" color="primary" [disabled]="!loginForm.valid">Login here</button>
       </md-card-actions>
     </form>
     <hr>
