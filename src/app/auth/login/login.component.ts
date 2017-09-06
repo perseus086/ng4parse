@@ -14,13 +14,12 @@ export class LoginComponent implements OnInit {
 
   private loginForm: FormGroup;
 
-  constructor(private parseService: ParseService, private router: Router, public snackBar: MdSnackBar, private formBuilder: FormBuilder) {
-
+  constructor(private parseService: ParseService, private router: Router,
+              public snackBar: MdSnackBar, private formBuilder: FormBuilder) {
     this.loginForm = formBuilder.group({
       userName: [null, Validators.compose([Validators.required, Validators.email])],
       password: [null, Validators.compose([Validators.required, Validators.minLength(6)])]
     })
-
   }
 
   ngOnInit() {
@@ -32,11 +31,9 @@ export class LoginComponent implements OnInit {
   onSubmit(formReference) {
     this.parseService.login(formReference.userName, formReference.password)
       .then( (user) => {
-        console.log('here', user);
         this.router.navigate(['restricted']);
       })
       .catch( (error) => {
-        console.log(error);
         this.snackBar.open('Error: cannot login. Please verify email, password or verify the account on your email', 'OK', {
           duration: 5000,
         });
